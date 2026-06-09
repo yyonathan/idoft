@@ -1,0 +1,43 @@
+name: flaky_tests
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  confirm_flaky:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Idoft Fork
+        uses: actions/checkout@v5
+        
+      - name: Set up Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven  
+      - name: Clone Repository
+        run: |
+          git clone https://github.com/kiegroup/jbpm
+          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          git rev-parse HEAD
+
+      - name: Run without Tests
+        run: |
+          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          mvn clean install -DskipTests -pl jbpm-case-mgmt/jbpm-case-mgmt-impl -am
+
+      - name: Run Tests
+        run: |
+          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2 
+
+      - name: Run NonDex Test
+        run: |
+          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2
+          
+      
+    
+    
