@@ -26,7 +26,7 @@ jobs:
       - name: Run without Tests
         run: |
           cd jbpm
-          mvn clean install -DskipTests -pl jbpm-case-mgmt/jbpm-case-mgmt-impl -am
+          mvn clean install -DskipTests -pl jbpm-case-mgmt/jbpm-case-mgmt-impl -am Denforcer.skip=true
 
       - name: Run Tests
         run: |
