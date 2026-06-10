@@ -36,7 +36,6 @@ jobs:
       - name: Run NonDex Test
         run: |
           cd jbpm
-          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | nondex-test.log
-      
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee nondex-test.log
     
     
