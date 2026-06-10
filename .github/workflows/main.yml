@@ -31,7 +31,7 @@ jobs:
       - name: Run Tests
         run: |
           cd jbpm
-          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2 
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence
 
       - name: Run NonDex Test
         run: |
