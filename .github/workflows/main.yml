@@ -37,5 +37,15 @@ jobs:
         run: |
           cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee nondex-test.log
-    
+      
+      - name: Upload Logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flaky-test-logs
+          path: |
+            jbpm/regular-test.log
+            jbpm/nondex-test.log 
+          
+          
     
