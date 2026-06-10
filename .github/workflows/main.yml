@@ -20,22 +20,22 @@ jobs:
       - name: Clone Repository
         run: |
           git clone https://github.com/kiegroup/jbpm
-          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          cd jbpm
           git rev-parse HEAD
 
       - name: Run without Tests
         run: |
-          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          cd jbpm
           mvn clean install -DskipTests -pl jbpm-case-mgmt/jbpm-case-mgmt-impl -am
 
       - name: Run Tests
         run: |
-          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2 
 
       - name: Run NonDex Test
         run: |
-          cd jbpm-case-mgmt/jbpm-case-mgmt-impl
+          cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2
           
       
