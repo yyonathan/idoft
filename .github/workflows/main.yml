@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 11
           cache: maven  
       - name: Clone Repository
         run: |
@@ -31,13 +31,12 @@ jobs:
       - name: Run Tests
         run: |
           cd jbpm
-          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee regular-test.log
 
       - name: Run NonDex Test
         run: |
           cd jbpm
-          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=org.apache.jackrabbit.oak.security.authentication.ldap.impl.LdapIdentityProviderTest#testSplitDNIntermediatePath2
-          
+          mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | nondex-test.log
       
     
     
