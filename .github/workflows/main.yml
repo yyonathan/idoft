@@ -30,13 +30,13 @@ jobs:
 
       - name: Run Tests
         run: |
-          set -o pipeline
+          set -o pipefail
           cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee regular-test.log
 
       - name: Run NonDex Test
         run: |
-          set -o pipeline
+          set -o pipefail
           cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee nondex-test.log
       
