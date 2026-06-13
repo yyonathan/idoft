@@ -30,13 +30,21 @@ jobs:
 
       - name: Run Tests
         run: |
+          set -o pipeline
           cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl test -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee regular-test.log
 
       - name: Run NonDex Test
         run: |
+          set -o pipeline
           cd jbpm
           mvn -pl jbpm-case-mgmt/jbpm-case-mgmt-impl edu.illinois:nondex-maven-plugin:2.1.1:nondex -Dtest=org.jbpm.casemgmt.impl.CaseIdGeneratorTest#testStartEmptyCaseWithOverridingSequence | tee nondex-test.log
+      
+      - name: Create CI Build Log
+        if: always()
+        run: |
+          cd jbpm
+          cat regular-test.log nondex-test.log > ci-build.log
       
       - name: Upload Logs
         if: always()
@@ -46,6 +54,6 @@ jobs:
           path: |
             jbpm/regular-test.log
             jbpm/nondex-test.log 
-          
+            jbm/ci-build.log
           
     
