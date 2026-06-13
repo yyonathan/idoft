@@ -54,6 +54,6 @@ jobs:
           path: |
             jbpm/regular-test.log
             jbpm/nondex-test.log 
-            jbm/ci-build.log
+            jbpm/ci-build.log
           
     
